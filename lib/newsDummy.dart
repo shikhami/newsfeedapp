@@ -19,7 +19,5 @@ const newsDummy = {
       "url": "https://timesofindia.indiatimes.com/india/after-protest-on-kailash-mansarovar-road-nepal-puts-up-armed-police-outpost-for-1st-time-near-border/articleshow/75768780.cms",
       "urlToImage": "https://static.toiimg.com/thumb/msid-47529300,width-1070,height-580,imgsize-110164,resizemode-75,overlay-toi_sw,pt-32,y_pad-40/photo.jpg"
     },
-   
-   
   ]
 };

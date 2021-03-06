@@ -17,8 +17,6 @@ class SharePreference {
     preferences.clear();
   }
 }
-  
-
 
 class StorageManager {
   static void saveData(String key, dynamic value) async {
@@ -43,5 +41,5 @@ class StorageManager {
   static Future<bool> deleteData(String key) async {
     final prefs = await SharedPreferences.getInstance();
     return prefs.remove(key);
+      }
   }
-}

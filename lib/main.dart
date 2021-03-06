@@ -8,26 +8,19 @@ import 'newsModal.dart';
 import 'shared.dart';
 
 void main() {
-  runApp(
-    ChangeNotifierProvider<ThemeNotifier>(
-    create: (_) => new ThemeNotifier(),
-    child:
-     MyApp()
-  ));
+  runApp(ChangeNotifierProvider<ThemeNotifier>(
+      create: (_) => new ThemeNotifier(), child: MyApp()));
 }
 
 class MyApp extends StatefulWidget {
-  
   @override
   _MyAppState createState() => _MyAppState();
 }
 
 class _MyAppState extends State<MyApp> {
-
-       int index = 0;
+  int index = 0;
   NewsModal newsModal;
-  
-           
+  List<int> items = List<int>.generate(100, (index) => index);
 
   @override
   void initState() {
@@ -82,74 +75,79 @@ class _MyAppState extends State<MyApp> {
       publishedAt: newsModal.result[index].publishedAt,
       url: newsModal.result[index].url,
     );
-  }     
+  }
+
   @override
   Widget build(BuildContext context) {
-     int prevIndex = index <= 0 ? 0 : index - 1;
+    int prevIndex = index <= 0 ? 0 : index - 1;
     int nextIndex = index == newsModal.result.length - 1 ? 0 : index + 1;
-    return Consumer<ThemeNotifier>(
-      builder: (context, theme, child) {
-    return MaterialApp(
-    
-      darkTheme: theme.getTheme(),
+    return Consumer<ThemeNotifier>(builder: (context, theme, child) {
+      return MaterialApp(
+        darkTheme: theme.getTheme(),
         theme: theme.getTheme(),
-      debugShowCheckedModeBanner: false,
-  
-      home: Scaffold(
-      appBar: AppBar(
-        
-        title:  Text('Feeds'),
-        
-        actions:[
-            SizedBox(
-              width: 80,
-              child: RaisedButton(
-                
-                onPressed: (){
-                 theme.setLightMode();
-               },
-               child: Text(' Light Theme'),),
-            )   ,
-             SizedBox(
-               width:80,
-               child: RaisedButton(onPressed: (){
-                 theme.setDarkMode();
-               },
-               child: Text(' Dark Theme'),),
-             )   ,
-
-          
-         
-          IconButton(
-            icon: Icon(
-              Icons.share,
-              color: Colors.green,
-            ),
-            onPressed: () {
-              
-            },
+        debugShowCheckedModeBanner: false,
+        home: Scaffold(
+          appBar: AppBar(
+            title: Text('Feeds'),
+            actions: [
+              SizedBox(
+                width: 80,
+                child: RaisedButton(
+                  onPressed: () {
+                    theme.setLightMode();
+                  },
+                  child: Text(' Light Theme'),
+                ),
+              ),
+              SizedBox(
+                width: 80,
+                child: RaisedButton(
+                  onPressed: () {
+                    theme.setDarkMode();
+                  },
+                  child: Text(' Dark Theme'),
+                ),
+              ),
+              IconButton(
+                icon: Icon(
+                  Icons.share,
+                  color: Colors.green,
+                ),
+                onPressed: () {},
+              ),
+            ],
           ),
-         
-        ],
-        
-      ),
-      body: Center(
-        child: Dismissible(
-          background: newsCard(prevIndex),
-          child: newsCard(index),
-          secondaryBackground: newsCard(nextIndex),
-          resizeDuration: Duration(milliseconds: 10),
-          key: Key(index.toString()),
-          direction: DismissDirection.vertical,
-          onDismissed: (direction) {
-            updateContent(direction);
-          },
+          body: Center(
+            child: Dismissible(
+              background: newsCard(prevIndex),
+              child:
+                  //Container(
+                  //  height:double.infinity,
+                  //  width: double.infinity,
+                  // child:
+                  Card(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(10),
+                  ),
+                ),
+                child: newsCard(index),
+              ),
+              // ),
+              secondaryBackground: newsCard(nextIndex),
+              resizeDuration: Duration(milliseconds: 10),
+              key: Key(index.toString()),
+              direction: DismissDirection.vertical,
+              onDismissed: (direction) {
+                updateContent(direction);
+              },
+            ),
+          ),
+
+          // ],
+          //),
         ),
-      ),
-    ),
-    );
-      }
-    );
+      );
+    });
   }
 }
-

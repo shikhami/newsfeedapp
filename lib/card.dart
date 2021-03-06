@@ -31,6 +31,7 @@ class NewsCard extends StatelessWidget {
             width: double.infinity,
             color: Colors.grey.withOpacity(0.2),
             child: Image.network(
+             
               imgUrl,
               fit: BoxFit.fill,
             ),
